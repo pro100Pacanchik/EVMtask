@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+val input = Scanner(System.`in`)
+
+fun main(args: Array<String>) {
+    println("Введите строку ");
+    var StringInput = readLine()!!;
+    StringInput;
+    StringInput.reversed();
+    var number: Int = 0;
+    val len: Int = StringInput.length - 1;
+    for(i in StringInput.indices)  {
+        if(StringInput[len - i] == '1') {
+            number += binpow(i);
+        }
+    }
+    println("число $number, при делении на 15 получим ${number %15 == 0}")
+}
+
+fun binpow (n: Int): Int {
+    var  base = 2;
+    var  power = n;
+    var res = 1;
+    while (power != 0) {
+        if((power) and 1 != 0)
+            res *= base;
+        base *= base;
+        power = power shr 1;
+    }
+    return res;
+}
