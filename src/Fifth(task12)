@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+typealias coordinates = Pair<Double,Double>;
+
+fun CoordinatesInput (): coordinates{
+    val input = Scanner(System.`in`)
+    println("Write down the Coordiantes of A")
+    println("x Coordinate")
+    val abscissaDot = input.nextDouble();
+    println("y Coordinate")
+    val ordinateDot = input.nextDouble();
+    val coordinatesOfDot: coordinates = abscissaDot to ordinateDot;
+    return coordinatesOfDot;
+}
+
+
+fun main (args: Array<String>) {
+    val dotA = CoordinatesInput();
+    val dotB =  CoordinatesInput();
+    whoBiggerAngle(dotA,dotB);
+}
+
+fun whoBiggerAngle (dotA: coordinates, dotB: coordinates) {
+    val result: Double =  dotA.first * dotB.second - dotA.second  * dotB.first;
+    when {
+        (result == 0.0) -> println("Углы равны");
+        (result < 0) -> println("ОА образует больший угол")
+        (result > 0) -> println("ОB образует больший угол")
+    }
+}
