@@ -1,0 +1,34 @@
+
+import java.math.*;
+import java.math.BigInteger
+import java.util.Scanner;
+
+val input = Scanner(System.`in`)
+
+fun main(args: Array<String>) {
+    println("Введите строку ");
+    var StringInput = readLine()!!;
+    StringInput;
+    StringInput.reversed();
+    var number =BigInteger("0") ;
+    val len: Int = StringInput.length - 1;
+    for(i in StringInput.indices)  {
+        if(StringInput[len - i] == '1') {
+            number += binpow(i.toBigInteger());
+        }
+    }
+    println("число $number, при делении на 15 получим ${number.rem(15.toBigInteger()) == 0.toBigInteger()}")
+}
+
+fun binpow (n: BigInteger): BigInteger {
+    var  base = BigInteger("2");
+    var  power  = n
+    var res = BigInteger("1");
+    while (power != 0.toBigInteger()) {
+        if(power.rem(2.toBigInteger()) != 0.toBigInteger())
+            res = res.times(base);
+        base = base.times(base);
+        power = power.div(2.toBigInteger());
+    }
+    return res;
+}
