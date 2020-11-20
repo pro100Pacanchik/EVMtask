@@ -1,0 +1,67 @@
+import java.io.File
+import java.io.FileReader
+import java.lang.Exception
+import java.math.*;
+import java.math.BigInteger
+import java.util.Scanner;
+
+
+fun main(args: Array<String>) {
+    ReadingFile();
+}
+
+fun WriteNumbersInFile(A: BigInteger, B: BigInteger) {
+    val writer = File("Output.txt").bufferedWriter()
+    writer.write("result: ${binpow(A,B)} ")
+    writer.close();
+}
+
+
+fun ReadingFile() {
+    var index = 0;
+    var str: String  = "";
+    try {
+        var fin  = FileReader("Input.txt");
+        var c: Int?
+        do {
+            c = fin.read()
+            str += (c.toChar());
+        } while(c != -1)
+    } catch (ex:Exception) {
+        print(ex.message);
+    }
+    var temp: String = "";
+    var A: BigInteger = BigInteger("0")
+    var B: BigInteger = BigInteger("0");
+    var flagFirstNumber: Boolean = false;
+    for(i in str.indices) {
+        if(flagFirstNumber == true && temp != "") {
+            B = temp.toBigInteger()
+        }
+        if(str[i] == ' ' && flagFirstNumber == false) {
+            A = temp.toBigInteger()
+            flagFirstNumber = true;
+            temp = "";
+        }
+        else
+            temp += str[i];
+    }
+    println("$A  ; $B")
+    WriteNumbersInFile(A,B);
+}
+
+
+fun binpow (A: BigInteger,B: BigInteger): BigInteger {
+    var  base = A;
+    var  power  = B
+    var res = BigInteger("1");
+    while (power != 0.toBigInteger()) {
+        if(power.rem(2.toBigInteger()) != 0.toBigInteger())
+            res = res.times(base);
+        base = base.times(base);
+        power = power.div(2.toBigInteger());
+    }
+    return res;
+}
+
+
