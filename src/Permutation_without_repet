@@ -1,0 +1,50 @@
+
+import java.util.Scanner;
+
+val input = Scanner(System.`in`)
+var num = 1
+fun main(args: Array<String>) {
+    val n = input.nextInt();
+    var array: IntArray = IntArray(n,{0})
+    for (i in 0..n) {
+        array[i] = i + 1;
+    }
+    while(NextPermutation(array,n)) {
+        PrintArray(array, n);
+    }
+}
+
+fun NextPermutation (array: IntArray, n: Int): Boolean{
+    var j = n - 2;
+    while(j != -1 && array[j] > array[j + 1])
+        --j
+    if(j == - 1)
+        return false;
+    else {
+        var k = n - 1;
+        while (array[j] > array[k])
+            --k;
+        with(array[j]) {
+            array[j] = array[k]
+            array[k] = this
+        }
+        var l = j + 1; var r = n - 1
+        while(l < r) {
+            with(array[l]) {
+                array[l] = array[r]
+                array[r] = this
+            }
+            ++l; ++r;
+        }
+        return true;
+    }
+}
+
+fun PrintArray (array: IntArray, n: Int) {
+    print(num); ++num;
+    for(i in 0..n) {
+        print("${array[i]} ");
+    }
+    println();
+}
+
